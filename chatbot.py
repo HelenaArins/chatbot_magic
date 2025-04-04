@@ -1,6 +1,7 @@
 # chatbot.py
 
 import db
+import requests
 
 # Função para mostrar o menu de opções
 def menu():
@@ -24,9 +25,9 @@ def interagir():
         elif opcao == "2":
             nome_carta = input("Digite o nome da carta: ")
             colecao = input("Digite o nome da coleção onde deseja adicionar a carta: ")
-            preco = float(input("Digite o preço da carta: "))
+            preco = input("Digite o preço da carta (deixe em branco para usar o preço da API): ")
+            preco = float(preco) if preco else None
             db.adicionar_carta(nome_carta, colecao, preco)
-            print(f"Carta '{nome_carta}' adicionada à coleção '{colecao}'!")
         
         elif opcao == "3":
             colecao = input("Digite o nome da coleção para listar as cartas: ")
@@ -45,6 +46,7 @@ def interagir():
 
         else:
             print("Opção inválida! Tente novamente.")
+
 
 # Inicia o banco de dados
 db.init_db()
